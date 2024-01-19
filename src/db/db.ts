@@ -5,9 +5,9 @@ import { Client } from "pg";
 const client = new Client({
     host: "127.0.0.1",
     port: 5432,
-    user: "postgres",
+    user: "pifsound",
     password: "pifsound",
-    database: "postgres",
+    database: "pifsound",
   });
    
   await client.connect();

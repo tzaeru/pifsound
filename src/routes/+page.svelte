@@ -6,43 +6,48 @@
 
 	export let form: ActionData;
 
+	let loggedIn = data.loggedIn;
+
 	console.log(data);
 	console.log(form);
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Pifsound</title>
+	<meta name="description" content="Pifsound PoC" />
 </svelte:head>
+
+{#if !loggedIn}
+	<form method="POST" action="?/login">
+		<input name="name" value="Sirpa" />
+		<input name="password" value="pifsound" type="password" />
+
+		<button>login</button>
+	</form>
+{:else}
+	<form method="POST" action="?/logout">
+		<button>logout</button>
+	</form>
+{/if}
 
 <section>
 	<h1>
-		<span class="welcome">
-			PiFSound
-		</span>
+		<span class="welcome"> PiFSound </span>
 	</h1>
 
 	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
+		artist: <b>{data.music[0].artists?.name}</b><br/>
+		album: <b>{data.music[0].albums?.name}</b><br/>
+		songs:
+		<ul>
+			{#each data.music as entry}
+				<li>{entry.tracks.name}</li>
+				<Player artist={data.music[0].artists?.name} album={data.music[0].albums?.name} songName  = {entry.tracks.name}/>
+			{/each}
+		</ul>
 	</h2>
-
-	{data.music[0].artists?.name}<br/>
-	{data.music[0].albums?.name}<br/>
-	{data.music[0].tracks?.name}
+	
 </section>
-
-<form
-	method="POST"
-	action="?/login"
->
-
-<input name="name" value="Sirpa"/>
-<input name="password" value="pifsound" type="password"/>
-
-<button>login</button>
-</form>
-
-<Player/>
 
 <style>
 	section {
