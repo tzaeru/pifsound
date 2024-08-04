@@ -27,11 +27,12 @@ export const actions = {
 		const name = data.getAll('name') as string[];
 		const password = data.getAll('password') as string[];
 		cookies.set('loggedIn', true);
+		cookies.set('userId', "12345");
 		console.log(name);
 		console.log(password);
 	},
 	logout: async ({ request, cookies }) => {
-		cookies.set('loggedIn', false);
+		cookies.delete('loggedIn');
 	}
 } satisfies Actions;
 

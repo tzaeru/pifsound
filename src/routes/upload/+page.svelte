@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+	import type { PageData, ActionData } from './$types';
+
     /*let selectedFile;
 
     function handleFileChange(event) {
@@ -10,6 +12,9 @@
         // Perform file upload logic here
         console.log("File uploaded:", selectedFile);
     }*/
+	export let data: PageData;
+
+    console.log(data);
 </script>
 
 <main>

@@ -3,6 +3,7 @@ import type { PageServerLoad, Actions } from './$types';
 import { users, albums, artists, tracks } from '../../db/schema';
 import { eq, sql } from 'drizzle-orm';
 import { fail } from '@sveltejs/kit';
+import { writeFile } from 'fs/promises';
 
 type OutputType = { music: any };
 
@@ -42,7 +43,10 @@ export const actions = {
         }
   
         const { fileToUpload } = formData as { fileToUpload: File };
-    
         console.log(fileToUpload)
+
+
+        const writeFileResult = await writeFile("uploads/" + fileToUpload.name, Buffer.from(await fileToUpload.arrayBuffer()));
+        console.log(writeFileResult)
 	}
 } satisfies Actions;
